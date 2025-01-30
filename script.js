@@ -1,15 +1,16 @@
 document.getElementById("connectWallet").addEventListener("click", async () => {
     if (window.arweaveWallet) {
         try {
+            // Connect to the wallet with necessary permissions
             await window.arweaveWallet.connect(["ACCESS_ADDRESS", "ACCESS_BALANCE", "ACCESS_PUBLIC_KEY"]);
             const address = await window.arweaveWallet.getActiveAddress();
 
-            // Fetch Balance
+            // Fetch wallet balance
             const balance = await fetch(`https://arweave.net/wallet/${address}/balance`)
                 .then(res => res.text())
-                .then(data => (parseFloat(data) / 1e12).toFixed(4));
+                .then(data => (parseFloat(data) / 1e12).toFixed(4)); // AR balance in AR units
 
-            // Fetch Avatar & arNS Name
+            // Fetch avatar & ArNS Name
             const profileData = await fetch(`https://arweave.net/graphql`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -20,9 +21,9 @@ document.getElementById("connectWallet").addEventListener("click", async () => {
 
             const avatarUrl = profileData.data.transactions.edges.length
                 ? `https://arweave.net/${profileData.data.transactions.edges[0].node.id}`
-                : "https://via.placeholder.com/80";
+                : "https://via.placeholder.com/80"; // Default avatar if none found
 
-            // Update UI
+            // Update UI with the wallet's information
             document.getElementById("walletAddress").textContent = address;
             document.getElementById("walletBalance").textContent = balance;
             document.getElementById("walletAvatar").src = avatarUrl;

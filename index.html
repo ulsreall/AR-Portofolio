@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Portofolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AR Portofolio</h1>
+        <button id="connectWallet">Connect Wallet</button>
+        <div id="walletInfo" class="hidden">
+            <img id="walletAvatar" src="" alt="Wallet Avatar" class="avatar hidden">
+            <p><strong>Wallet Address:</strong> <span id="walletAddress"></span></p>
+            <p><strong>Nama (arNS):</strong> <span id="walletName"></span></p>
+            <p><strong>Saldo (AR):</strong> <span id="walletBalance"></span></p>
+            <h2>Transaksi Terbaru</h2>
+            <ul id="transactionList"></ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
